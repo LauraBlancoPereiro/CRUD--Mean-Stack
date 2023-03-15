@@ -1,0 +1,129 @@
+<div class="container">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+
+                    <form #usuarioForm="ngForm">
+
+                        <input type="text" name="_id" #_id="ngModel" [(ngModel)]="productoService.selectedProducto._id" 
+                        placeholder="Ingrese el id" [ngModelOptions]="{standalone: false}">
+
+                        <button class="btn btn-primary mr-2" (click)="validar(usuarioForm)">Check</button>
+
+                        <div *ngIf="productoService.getCondicion() === 'true'">
+                            
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s5">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                
+                                                <form #productoForm="ngForm" > 
+                                                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="productoService.selectedProducto._id">
+                                                    
+                                                    
+                                                    <div class="input-field col s12">
+                                                        
+
+                                                        <input type="text" name="tipo" #tipo="ngModel" [(ngModel)]="productoService.selectedProducto.tipo"
+                                                        placeholder="Ingrese el tipo" [ngModelOptions]="{standalone: false}">
+                            
+                                                        <input type="text" name="material" #material="ngModel" [(ngModel)]="productoService.selectedProducto.material"
+                                                        placeholder="Ingrese el material" [ngModelOptions]="{standalone: false}">
+                            
+                                                        <input type="text" name="marca" #marca="ngModel" [(ngModel)]="productoService.selectedProducto.marca"
+                                                        placeholder="Ingrese la marca" [ngModelOptions]="{standalone: false}">
+                            
+                                                        <input type="text" name="talla" #talla="ngModel" [(ngModel)]="productoService.selectedProducto.talla"
+                                                        placeholder="Ingrese la talla" [ngModelOptions]="{standalone: false}">
+                            
+                                                         <input type="text" name="cantidad" #cantidad="ngModel" [(ngModel)]="productoService.selectedProducto.cantidad"
+                                                        placeholder="Ingrese el cantidad" [ngModelOptions]="{standalone: false}"> 
+                                                        
+                                                        <input type="text" name="precio" #precio="ngModel" [(ngModel)]="productoService.selectedProducto.precio"
+                                                        placeholder="Ingrese el precio" [ngModelOptions]="{standalone: false}">
+                                                    </div>
+                                                   
+                                                    <button class="btn btn-primary mr-2" (click)="resetForm(productoForm)">Clean</button>
+                                                    <button class="btn btn-secondary" (click)="addProducto(productoForm)" >Save</button>
+                                                   
+                                                </form>
+                                            </div>
+                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col s7">
+                                    
+                                        <div id="search-component">
+                                            <label for="search-box"></label>
+                                            <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Busqueda por ID"/>
+                                            
+                                        </div>
+                                        <div id="search-component-tipo">
+                                            <label for="search-box"></label>
+                                            <input #searchBoxTipo tipo="search-box-tipo" (input)="searchTipo(searchBoxTipo.value)" placeholder="Busqueda por tipo"/>
+                                        </div>
+                                    
+                                        <table>
+                                            <thead>
+                                               
+                                                <th> Tipo </th>
+                                                <th> Material </th>
+                                                <th> Marca </th>
+                                                <th> Talla </th>
+                                                <th> Cantidad </th> 
+                                                <th> Precio </th>
+                                                <th> Opciones </th>
+                            
+                                            </thead>
+                                            <tbody>
+                                                
+                            
+                                                <tr *ngFor="let producto of productoService.productos">
+                                                    <td> {{producto.tipo}} </td>
+                                                    <td> {{producto.material}} </td>
+                                                    <td> {{producto.marca}} </td>
+                                                    <td> {{producto.talla}} </td>
+                                                    <td> {{producto.cantidad}} </td>
+                                                    <td> {{producto.precio}} </td>
+                                                    <td> 
+                                                        <a (click)="editProducto(producto)" class="btn btn-secondary btn-sm">
+                                                            <i class="material-icons">edit</i>
+                                                        </a>
+                                                        <a (click)="deleteProducto(producto._id,productoForm)" class="btn btn-secondary btn-sm">
+                                                            <i class="material-icons">delete</i>
+                            
+                                                        </a>
+                                           
+                                                      
+                                                        
+                                                    </td>
+                                               
+                                               
+                                                </tr>
+                            
+                                            </tbody>
+                                        </table>
+                            
+                                    </div>    
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+            
+
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+
+
+
+
+

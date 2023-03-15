@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    
+                    <form #usuarioForm="ngForm" > 
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="usuarioService.selectedUsuario._id">
+                        
+                        
+                        <div class="input-field col s12">
+                            
+                            <input type="text" name="rol" #rol="ngModel" [(ngModel)]="usuarioService.selectedUsuario.rol"
+                            placeholder="Ingrese el rol" [ngModelOptions]="{standalone: false}">
+
+                            <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="usuarioService.selectedUsuario.nombre"
+                            placeholder="Ingrese el nombre" [ngModelOptions]="{standalone: false}">
+
+                        </div>
+                       
+                        <button class="btn btn-primary mr-2" (click)="resetForm(usuarioForm)">Clean</button>
+                        <button class="btn btn-secondary" (click)="addUsuario(usuarioForm)" >Save</button>
+                       
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="col s7">
+        
+            <!-- <div id="search-component">
+                <label for="search-box"></label>
+                <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Busqueda por ID"/>
+                
+            </div>
+            <div id="search-component-tipo">
+                <label for="search-box"></label>
+                <input #searchBoxTipo tipo="search-box-tipo" (input)="searchTipo(searchBoxTipo.value)" placeholder="Busqueda por tipo"/>
+            </div> -->
+        
+            <table>
+                <thead>
+                   
+                    <th> ID </th>
+                    <th> Rol </th>
+                    <th> Nombre </th>
+                    <th> Opciones </th>
+
+                </thead>
+                <tbody>
+                    
+
+                    <tr *ngFor="let usuario of usuarioService.usuarios">
+                        <td> {{usuario._id}} </td>
+                        <td> {{usuario.rol}} </td>
+                        <td> {{usuario.nombre}} </td>
+                        <td> 
+                            <a (click)="deleteUsuario(usuario._id,usuarioForm)" class="btn btn-secondary btn-sm">
+                                <i class="material-icons">delete</i>
+
+                            </a>
+                 
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>    
+       
+    </div>
+</div>
+

@@ -1,0 +1,155 @@
+<div class="container">
+    <div class="row">
+        <form #usuarioForm="ngForm">
+
+            <input type="text" name="idUsuario" #idUsuario="ngModel" [(ngModel)]="compraService.selectedCompra.idUsuario" 
+            placeholder="Ingrese el id" [ngModelOptions]="{standalone: false}">
+
+            <button class="btn btn-primary mr-2" (click)="validar(usuarioForm)">Check</button>
+
+            <div *ngIf="compraService.getCondicion() === 'true'">
+                <div class="col s5">
+                    <div class="card">
+                     <div class="card-content">
+
+                        
+                        
+                            <form #compraForm="ngForm" click="addCompra(compraForm)">
+                                <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="compraService.selectedCompra._id">
+                                
+                                
+                                <div class="input-field col s12">
+                                    <input type="text" name="idUsuario" #idUsuario="ngModel" [(ngModel)]="compraService.selectedCompra.idUsuario"
+                                    placeholder="ID usuario" [ngModelOptions]="{standalone: false}">
+                                    
+                                    
+                                    <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="compraService.selectedCompra.nombre"
+                                    placeholder="Ingrese el nombre" [ngModelOptions]="{standalone: false}">
+
+                                    <input type="text" name="direccion" #direccion="ngModel" [(ngModel)]="compraService.selectedCompra.direccion"
+                                    placeholder="Ingrese la direccion" [ngModelOptions]="{standalone: false}">
+
+                                    <input type="text" name="cantidadUsuario" #cantidadUsuario="ngModel" [(ngModel)]="compraService.selectedCompra.cantidadUsuario"
+                                    placeholder="Ingrese el cantidad" [ngModelOptions]="{standalone: false}" required>
+
+                                    <input type="text" name="idProducto" #idProducto="ngModel" [(ngModel)]="compraService.selectedCompra.idProducto" placeholder="ID producto ">
+
+                                   
+                                </div>
+                            
+                                <button class="btn btn-primary mr-2" (click)="resetForm(compraForm)">Cancel</button>
+                                <button class="btn btn-secondary" (click)="addCompra(compraForm)" >Save </button>
+                            
+                            </form>
+                        </div>
+                    </div>
+                    <div id="search-component-tipo">
+                        <label for="search-box"></label>
+                        <input #searchBoxTipo tipo="search-box-tipo" (input)="searchTipo(searchBoxTipo.value)" placeholder="Busqueda por tipo"/>
+                    </div>
+                            <table>
+                                <thead>
+                                   
+                                    <th> Tipo </th>
+                                    <th> Material </th>
+                                    <th> Marca </th>
+                                    <th> Talla </th>
+                                     <th> Cantidad </th> 
+                                    <th> Precio </th>
+                                    <th> Opciones </th>
+                
+                                </thead>
+                                <tbody>
+                                    
+                
+                                    <tr *ngFor="let producto of compraService.productos">
+                                        <td> {{producto.tipo}} </td>
+                                        <td> {{producto.material}} </td>
+                                        <td> {{producto.marca}} </td>
+                                        <td> {{producto.talla}} </td>
+                                         <td> {{producto.cantidad}} </td> 
+                                        <td> {{producto.precio}} </td>
+                                        <td>
+
+
+                                            
+                                            
+                                            <a  class="btn btn-secondary btn-sm" (click)="anadirCarro(producto._id,producto.cantidad)">
+                                                <i class="material-icons">shopping_cart</i>
+                                            </a>
+                                        </td>
+                                        
+
+                                        <td> 
+                                            
+                               
+                                          
+                                            
+                                        </td>
+                                   
+                                   
+                                    </tr>
+                
+                                </tbody>
+                            </table>
+                            
+                    
+        
+                
+
+            
+
+                        </div>
+                
+            
+                
+                <div class="col s4">
+                    <div id="search-component-nombre">
+                        <label for="search-box"></label>
+                        <input #searchBoxNombre nombre="search-box-nombre" (input)="searchNombre(searchBoxNombre.value)" placeholder="Busqueda por nombre"/>
+                    </div>
+                    <table>
+                        <thead>
+                        
+                            <th> Nombre </th>
+                            <th> idProducto </th>
+                            <th> cantidad </th>
+                           <th> Dirección </th>
+                            <th> Opciones </th>
+
+
+                            
+
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let compra of compraService.compras">
+                                <td> {{compra.nombre}} </td>
+                                <td> {{compra.idProducto}} </td>
+                                <td> {{compra.cantidadUsuario}} </td>
+                                <td> {{compra.direccion}} </td>
+                                <td> 
+                                    <a (click)="editCompra(compra)" class="btn btn-secondary btn-sm">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a (click)="deleteCompra(compra,compraForm)" class="btn btn-secondary btn-sm">
+                                        <i class="material-icons">delete</i>
+
+                                    </a>  
+                                    
+                                </td>
+                        
+                        
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>  
+            </div>
+        </form>
+            
+    </div>
+</div>
+   
+
